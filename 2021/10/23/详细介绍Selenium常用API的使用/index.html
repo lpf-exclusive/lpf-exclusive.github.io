@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lxs.plus","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="一、Selenium环境配置1、下载浏览器驱动​     Firefox浏览器驱动：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详细介绍Selenium常用API的使用">
+<meta property="og:url" content="https://lxs.plus/2021/10/23/%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8DSelenium%E5%B8%B8%E7%94%A8API%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="刘先生の博客">
+<meta property="og:description" content="一、Selenium环境配置1、下载浏览器驱动​     Firefox浏览器驱动：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-23T06:29:43.000Z">
+<meta property="article:modified_time" content="2021-10-23T08:34:17.485Z">
+<meta property="article:author" content="刘鹏飞">
+<meta property="article:tag" content="selenium">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lxs.plus/2021/10/23/%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8DSelenium%E5%B8%B8%E7%94%A8API%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>详细介绍Selenium常用API的使用 | 刘先生の博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="刘先生の博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">刘先生の博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">年与时驰，意与日去，遂成枯落，多不接世，悲守穷庐，将复何及！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="calendar fa-fw"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/lpf-exclusive" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lxs.plus/2021/10/23/%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8DSelenium%E5%B8%B8%E7%94%A8API%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="刘鹏飞">
+      <meta itemprop="description" content="个人学习记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘先生の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          详细介绍Selenium常用API的使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-23 14:29:43 / 修改时间：16:34:17" itemprop="dateCreated datePublished" datetime="2021-10-23T14:29:43+08:00">2021-10-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%A8%8B%E5%BA%8F%E6%BC%94%E7%A4%BA/" itemprop="url" rel="index"><span itemprop="name">程序演示</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>17k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>15 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="一、Selenium环境配置"><a href="#一、Selenium环境配置" class="headerlink" title="一、Selenium环境配置"></a>一、Selenium环境配置</h1><h2 id="1、下载浏览器驱动"><a href="#1、下载浏览器驱动" class="headerlink" title="1、下载浏览器驱动"></a>1、下载浏览器驱动</h2><p>​     Firefox浏览器驱动：<span id="more"></span></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//github.com/mozilla/geckodriver/releases</span></span><br></pre></td></tr></table></figure>
+
+<p>​     Chrome浏览器驱动：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//sites.google.com/a/chromium.org/chromedriver/home</span></span><br></pre></td></tr></table></figure>
+
+<p>​     IE浏览器驱动：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//selenium-release.storage.googleapis.com/index.html</span></span><br></pre></td></tr></table></figure>
+
+<p>​     Edge浏览器驱动：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/</span></span><br></pre></td></tr></table></figure>
+
+<p>​     Opera浏览器驱动：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//github.com/operasoftware/operachromiumdriver/releases</span></span><br></pre></td></tr></table></figure>
+
+<p>​     PhantomJS浏览器驱动：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//phantomjs.org/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2、设置浏览器驱动"><a href="#2、设置浏览器驱动" class="headerlink" title="2、设置浏览器驱动"></a>2、设置浏览器驱动</h2><p>​    2.1、手动创建一个存放浏览器驱动的目录，将下载的浏览器驱动文件放在该目录下。</p>
+<p>​    2.2、我的电脑–&gt;属性–&gt;系统设置–&gt;高级–&gt;环境变量–&gt;系统变量–&gt;Path，将第(1)步创建的目录路径添加到Path的值中。</p>
+<h2 id="3、项目配置jar包"><a href="#3、项目配置jar包" class="headerlink" title="3、项目配置jar包"></a><strong>3、项目配置jar包</strong></h2><p>​    在pom.xml中配置Selenium</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- selenium-java --&gt;  </span><br><span class="line">&lt;dependency&gt;      </span><br><span class="line">    &lt;groupId&gt;org.seleniumhq.selenium&lt;/groupId&gt;      </span><br><span class="line">    &lt;artifactId&gt;selenium-java&lt;/artifactId&gt;      </span><br><span class="line">    &lt;version&gt;<span class="number">3.4</span><span class="number">.0</span>&lt;/version&gt;  </span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="二、测试Selenium"><a href="#二、测试Selenium" class="headerlink" title="二、测试Selenium"></a>二、测试Selenium</h1><p>  写一个简单的测试类来验证Selenium安装是否成功</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> javaBase;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SeleniumTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">        * 以下驱动根据自己配置的自行选择</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> ChromeDriver();    <span class="comment">//Chrome浏览器</span></span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> FirefoxDriver();   <span class="comment">//Firefox浏览器</span></span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> EdgeDriver();      <span class="comment">//Edge浏览器</span></span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> InternetExplorerDriver();  <span class="comment">// Internet Explorer浏览器</span></span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> OperaDriver();     <span class="comment">//Opera浏览器</span></span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> PhantomJSDriver();   <span class="comment">//PhantomJS</span></span><br><span class="line">        driver.get(<span class="string">&quot;https://www.baidu.com&quot;</span>);        </span><br><span class="line">        String title = driver.getTitle();</span><br><span class="line">        System.out.printf(title);</span><br><span class="line">        driver.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="三、selenium元素定位"><a href="#三、selenium元素定位" class="headerlink" title="三、selenium元素定位"></a>三、selenium元素定位</h1><p>  1、通过id定位：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driver.findElement(By.id(<span class="string">&quot;kw&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>  2、通过name定位：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driver.findElement(By.name(<span class="string">&quot;wd&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>  3、通过class name定位：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driver.findElement(By.className(<span class="string">&quot;s_ipt&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>  4、通过tag name定位：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driver.findElement(By.tagName(<span class="string">&quot;input&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>  5、通过xpath定位，这里列几个常用写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">driver.findElement(By.xpath(<span class="string">&quot;//*[@id=&#x27;kw&#x27;]&quot;</span>));</span><br><span class="line">driver.findElement(By.xpath(<span class="string">&quot;//*[@name=&#x27;wd&#x27;]&quot;</span>));</span><br><span class="line">driver.findElement(By.xpath(<span class="string">&quot;//input[@class=&#x27;s_ipt&#x27;]&quot;</span>));</span><br><span class="line">driver.findElement(By.xpath(<span class="string">&quot;/html/body/form/span/input&quot;</span>));</span><br><span class="line">driver.findElement(By.xpath(<span class="string">&quot;//span[@class=&#x27;soutu-btn&#x27;]/input&quot;</span>));</span><br><span class="line">driver.findElement(By.xpath(<span class="string">&quot;//form[@id=&#x27;form&#x27;]/span/input&quot;</span>));</span><br><span class="line">driver.findElement(By.xpath(<span class="string">&quot;//input[@id=&#x27;kw&#x27; and @name=&#x27;wd&#x27;]&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<p>  6、通过css定位，这里列几个常用写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">driver.findElement(By.cssSelector(<span class="string">&quot;#kw&quot;</span>));</span><br><span class="line">driver.findElement(By.cssSelector(<span class="string">&quot;[name=wd]&quot;</span>));</span><br><span class="line">driver.findElement(By.cssSelector(<span class="string">&quot;.s_ipt&quot;</span>));</span><br><span class="line">driver.findElement(By.cssSelector(<span class="string">&quot;html &gt; body &gt; form &gt; span &gt; input&quot;</span>));</span><br><span class="line">driver.findElement(By.cssSelector(<span class="string">&quot;span.soutu-btn&gt; input#kw&quot;</span>));</span><br><span class="line">driver.findElement(By.cssSelector(<span class="string">&quot;form#form &gt; span &gt; input&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<p>  7、通过link text定位：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driver.findElement(By.linkText(<span class="string">&quot;新闻&quot;</span>)driver.findElement(By.linkText(<span class="string">&quot;hao123&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>  8、通过partialLink text定位：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">driver.findElement(By.partialLinkText(<span class="string">&quot;新&quot;</span>));</span><br><span class="line">driver.findElement(By.partialLinkText(<span class="string">&quot;hao&quot;</span>));</span><br><span class="line">driver.findElement(By.partialLinkText(<span class="string">&quot;123&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<h1 id="四、控制浏览器操作"><a href="#四、控制浏览器操作" class="headerlink" title="四、控制浏览器操作"></a>四、控制浏览器操作</h1><h2 id="1、控制浏览器窗口大小"><a href="#1、控制浏览器窗口大小" class="headerlink" title="1、控制浏览器窗口大小"></a>1、控制浏览器窗口大小</h2><p>​    (1)、maximize() 设置浏览器最大化</p>
+<p>​    (2)、setSize() 设置浏览器宽高</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.openqa.selenium.Dimension;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Browser</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        WebDriver driver= <span class="keyword">new</span> ChromeDriver();</span><br><span class="line">        driver.get(<span class="string">&quot;https://www.baidu.com&quot;</span>);</span><br><span class="line">        driver.manage().window().maximize();</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        driver.get(<span class="string">&quot;https://www.baidu.com&quot;</span>);</span><br><span class="line">        driver.manage().window().setSize(<span class="keyword">new</span> Dimension(<span class="number">480</span>, <span class="number">800</span>));</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        driver.quit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、控制浏览器后退、前进"><a href="#2、控制浏览器后退、前进" class="headerlink" title="2、控制浏览器后退、前进"></a>2、控制浏览器后退、前进</h2><p>​    (1)、back() 模拟浏览器后退按钮</p>
+<p>​    (2)、forward() 模拟浏览器前进按钮</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.By;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BrowserGo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> ChromeDriver();    <span class="comment">//get 到百度首页    </span></span><br><span class="line">        driver.get(<span class="string">&quot;https://www.baidu.com/&quot;</span>);</span><br><span class="line">        System.out.printf(<span class="string">&quot;now accesss %s \n&quot;</span>, driver.getCurrentUrl());</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);        <span class="comment">//点击“新闻” 链接</span></span><br><span class="line">        driver.findElement(By.linkText(<span class="string">&quot;新闻&quot;</span>)).click();</span><br><span class="line">        System.out.printf(<span class="string">&quot;now accesss %s \n&quot;</span>, driver.getCurrentUrl());</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">    	<span class="comment">//执行浏览器后退</span></span><br><span class="line">        driver.navigate().back();</span><br><span class="line">        System.out.printf(<span class="string">&quot;back to %s \n&quot;</span>, driver.getCurrentUrl());</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">    	<span class="comment">//执行浏览器前面</span></span><br><span class="line">        driver.navigate().forward();</span><br><span class="line">        System.out.printf(<span class="string">&quot;forward to %s \n&quot;</span>, driver.getCurrentUrl());</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">    	driver.quit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  3、刷新页面</p>
+<p>​    (1)、refresh() 刷新页面</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//刷新页面</span></span><br><span class="line">driver.navigate().refresh();</span><br></pre></td></tr></table></figure>
+
+<p><strong>五、WebDriver常用方法</strong>  </p>
+<p>  1、WebDriver 常用方法</p>
+<p>   (1)、clear() 清除文本。</p>
+<p>​    (2)、sendKeys(*value) 模拟按键输入。</p>
+<p>​    (3)、click() 单击元素。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.openqa.selenium.By;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebElement;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaiduDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> ChromeDriver();</span><br><span class="line">        driver.get(<span class="string">&quot;https://www.baidu.com&quot;</span>);</span><br><span class="line">    	WebElement search_text = driver.findElement(By.id(<span class="string">&quot;kw&quot;</span>));</span><br><span class="line">        WebElement search_button = driver.findElement(By.id(<span class="string">&quot;su&quot;</span>));</span><br><span class="line">    	search_text.sendKeys(<span class="string">&quot;Java&quot;</span>);</span><br><span class="line">        search_text.clear();</span><br><span class="line">        search_text.sendKeys(<span class="string">&quot;Selenium&quot;</span>);</span><br><span class="line">        search_button.click();</span><br><span class="line">        driver.quit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  2、其他常用方法</p>
+<p>​    (1)、submit()方法用于提交表单。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WebElement search_text = driver.findElement(By.id(<span class="string">&quot;kw&quot;</span>));</span><br><span class="line">search_text.sendKeys(<span class="string">&quot;Selenium&quot;</span>);</span><br><span class="line">search_text.submit();</span><br></pre></td></tr></table></figure>
+
+<p>​    (2)、getSize() 返回元素的尺寸。</p>
+<p>​    (3)、getText() 获取元素的文本。</p>
+<p>​    (4)、getAttribute(name) 获得属性值。</p>
+<p>​    (5)、isDisplayed() 设置该元素是否用户可见。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.openqa.selenium.By;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebElement;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaiduDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> ChromeDriver();</span><br><span class="line">        driver.get(<span class="string">&quot;https://www.baidu.com/&quot;</span>);</span><br><span class="line">    	<span class="comment">//获得百度输入框的尺寸</span></span><br><span class="line">        WebElement size = driver.findElement(By.id(<span class="string">&quot;kw&quot;</span>));</span><br><span class="line">        System.out.println(size.getSize());</span><br><span class="line">    	<span class="comment">//返回百度页面底部备案信息</span></span><br><span class="line">        WebElement text = driver.findElement(By.id(<span class="string">&quot;cp&quot;</span>));</span><br><span class="line">        System.out.println(text.getText());</span><br><span class="line">    	<span class="comment">//返回元素的属性值， 可以是 id、 name、 type 或元素拥有的其它任意属性</span></span><br><span class="line">        WebElement ty = driver.findElement(By.id(<span class="string">&quot;kw&quot;</span>));</span><br><span class="line">        System.out.println(ty.getAttribute(<span class="string">&quot;type&quot;</span>));</span><br><span class="line">    	<span class="comment">//返回元素的结果是否可见， 返回结果为 True 或 False</span></span><br><span class="line">        WebElement display = driver.findElement(By.id(<span class="string">&quot;kw&quot;</span>));</span><br><span class="line">        System.out.println(display.isDisplayed());</span><br><span class="line">    	driver.quit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>六、模拟鼠标操作</strong></p>
+<p>  导入提供鼠标操作的 ActionChains 类</p>
+<ul>
+<li><p>Actions(driver) 调用Actions()类，将浏览器驱动driver作为参数传入。</p>
+<p>1、Actions 类提供了鼠标操作的常用方法：</p>
+</li>
+</ul>
+<p>​    (1)、contextClick() 右击</p>
+<p>​    (2)、clickAndHold() 鼠标点击并控制</p>
+<p>​    (3)、doubleClick() 双击</p>
+<p>​    (4)、dragAndDrop() 拖动</p>
+<p>​    (5)、release() 释放鼠标</p>
+<p>​    (6)、perform() 执行所有Actions中存储的行为</p>
+<p>​    (7)、clickAndHold() 方法用于模拟鼠标悬停操作</p>
+<p>​    (8)、perform() 提交所有ActionChains中存储的行为</p>
+<p>  2、关于鼠标操作的其他方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.openqa.selenium.interactions.Actions;</span><br><span class="line">Actions action = <span class="keyword">new</span> Actions(driver);</span><br><span class="line"><span class="comment">// 鼠标右键点击指定的元素</span></span><br><span class="line">action.contextClick(driver.findElement(By.id(<span class="string">&quot;element&quot;</span>))).perform();</span><br><span class="line"><span class="comment">// 鼠标右键点击指定的元素</span></span><br><span class="line">action.doubleClick(driver.findElement(By.id(<span class="string">&quot;element&quot;</span>))).perform();</span><br><span class="line"><span class="comment">// 鼠标拖拽动作， 将 source 元素拖放到 target 元素的位置。</span></span><br><span class="line">WebElement source = driver.findElement(By.name(<span class="string">&quot;element&quot;</span>));</span><br><span class="line">WebElement target = driver.findElement(By.name(<span class="string">&quot;element&quot;</span>));</span><br><span class="line">action.dragAndDrop(source,target).perform();</span><br><span class="line"><span class="comment">// 释放鼠标</span></span><br><span class="line">action.release().perform();</span><br></pre></td></tr></table></figure>
+
+<p><strong>七、模拟键盘操作</strong></p>
+<p>  常用的键盘操作：</p>
+<p>​    (1)、sendKeys(Keys.BACK_SPACE) 回格键（BackSpace）<br>​    (2)、sendKeys(Keys.SPACE) 空格键(Space)<br>​    (3)、sendKeys(Keys.TAB) 制表键(Tab)<br>​    (4)、sendKeys(Keys.ESCAPE) 回退键（Esc）<br>​    (5)、sendKeys(Keys.ENTER) 回车键（Enter）<br>​    (6)、sendKeys(Keys.CONTROL,‘a’) 全选（Ctrl+A）<br>​    (7)、sendKeys(Keys.CONTROL,‘c’) 复制（Ctrl+C）<br>​    (8)、sendKeys(Keys.CONTROL,‘x’) 剪切（Ctrl+X）<br>​    (9)、sendKeys(Keys.CONTROL,‘v’) 粘贴（Ctrl+V）<br>​    (10)、sendKeys(Keys.F1) 键盘 F1<br>​    (11)、sendKeys(Keys.F12) 键盘 F12</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebElement;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.By;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.Keys;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Keyboard</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> ChromeDriver();</span><br><span class="line">        driver.get(<span class="string">&quot;https://www.baidu.com&quot;</span>);</span><br><span class="line">        WebElement input = driver.findElement(By.id(<span class="string">&quot;kw&quot;</span>));</span><br><span class="line">        <span class="comment">//输入框输入内容</span></span><br><span class="line">        input.sendKeys(<span class="string">&quot;selenium&quot;</span>);</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        input.sendKeys(Keys.BACK_SPACE);</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        <span class="comment">//输入空格键+“教程”</span></span><br><span class="line">        input.sendKeys(Keys.SPACE);</span><br><span class="line">        input.sendKeys(<span class="string">&quot;教程&quot;</span>);</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        <span class="comment">//ctrl+a 全选输入框内容</span></span><br><span class="line">        input.sendKeys(Keys.CONTROL,<span class="string">&quot;a&quot;</span>);</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        <span class="comment">//ctrl+x 剪切输入框内容</span></span><br><span class="line">        input.sendKeys(Keys.CONTROL,<span class="string">&quot;x&quot;</span>);</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        <span class="comment">//ctrl+v 粘贴内容到输入框</span></span><br><span class="line">        input.sendKeys(Keys.CONTROL,<span class="string">&quot;v&quot;</span>);</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        <span class="comment">//通过回车键盘来代替点击操作</span></span><br><span class="line">        input.sendKeys(Keys.ENTER);</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        driver.quit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>八、获取断言信息</strong></p>
+<p>  (1)、getTitle()：用于获得当前页面的title。</p>
+<p>  (2)、getCurrentUrl() ：用户获得当前页面的URL。</p>
+<p>  (3)、getText() 获取页面文本信息。</p>
+<p><strong>九、设置元素等待</strong></p>
+<p>1、显式等待</p>
+<p>  具体格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WebDriverWait(driver, <span class="number">10</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>​    参数说明：<br>​      driver：浏览器驱动。10：最长超时时间， 默认以秒为单位。</p>
+<p>​                        1：检测的的间隔（步长） 时间， 默认为 0.5s。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.openqa.selenium.By;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebElement;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.support.ui.WebDriverWait;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.support.ui.ExpectedCondition;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimeOut01</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[]args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    	WebDriver driver = <span class="keyword">new</span> ChromeDriver();</span><br><span class="line">        driver.get(<span class="string">&quot;https://www.baidu.com&quot;</span>);</span><br><span class="line">    	<span class="comment">//显式等待， 针对某个元素等待</span></span><br><span class="line">        WebDriverWait wait = <span class="keyword">new</span> WebDriverWait(driver,<span class="number">10</span>,<span class="number">1</span>);</span><br><span class="line">        wait.until(<span class="keyword">new</span> ExpectedCondition&lt;WebElement&gt;()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> WebElement <span class="title">apply</span><span class="params">(WebDriver text)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> text.findElement(By.id(<span class="string">&quot;kw&quot;</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).sendKeys(<span class="string">&quot;selenium&quot;</span>);</span><br><span class="line">    	driver.findElement(By.id(<span class="string">&quot;su&quot;</span>)).click();</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">    	driver.quit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、隐式等待</p>
+<p>  (1)、implicitlyWait。识别对象时的超时时间。</p>
+<p>  (2)、setScriptTimeout。异步脚本的超时时间。</p>
+<p>  (3)、pageLoadTimeout。页面加载时的超时时间。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.By;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimeOut02</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> ChromeDriver();</span><br><span class="line">    	<span class="comment">//页面加载超时时间设置为 5s</span></span><br><span class="line">        driver.manage().timeouts().pageLoadTimeout(<span class="number">5</span>, TimeUnit.SECONDS);</span><br><span class="line">        driver.get(<span class="string">&quot;https://www.baidu.com/&quot;</span>);</span><br><span class="line">    	<span class="comment">//定位对象时给 10s 的时间, 如果 10s 内还定位不到则抛出异常</span></span><br><span class="line">        driver.manage().timeouts().implicitlyWait(<span class="number">10</span>, TimeUnit.SECONDS);</span><br><span class="line">        driver.findElement(By.id(<span class="string">&quot;kw&quot;</span>)).sendKeys(<span class="string">&quot;selenium&quot;</span>);</span><br><span class="line">    	<span class="comment">//异步脚本的超时时间设置成 3s</span></span><br><span class="line">        driver.manage().timeouts().setScriptTimeout(<span class="number">3</span>, TimeUnit.SECONDS);</span><br><span class="line">    	driver.quit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>十、多窗口切换</strong></p>
+<p>  1、getWindowHandle()：获得当前窗口句柄。</p>
+<p>  2、getWindowHandles()：返回的所有窗口的句柄到当前会话。</p>
+<p> 3、switchTo().window()：用于切换到相应的窗口，与上一节的switchTo().frame()类似，前者用于不同窗口的切换， 后者用于不同表单之间的切换。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.By;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MoreWindows</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] arge)</span> <span class="keyword">throws</span> InterruptedException</span>&#123;</span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> ChromeDriver();</span><br><span class="line">        driver.get(<span class="string">&quot;https://www.baidu.com&quot;</span>);</span><br><span class="line">        <span class="comment">//获得当前窗口句柄</span></span><br><span class="line">        String search_handle = driver.getWindowHandle();</span><br><span class="line">        <span class="comment">//打开百度注册窗口</span></span><br><span class="line">        driver.findElement(By.linkText(<span class="string">&quot;登录&quot;</span>)).click();</span><br><span class="line">        Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">        driver.findElement(By.linkText(<span class="string">&quot;立即注册&quot;</span>)).click();</span><br><span class="line">        <span class="comment">//获得所有窗口句柄</span></span><br><span class="line">        Set&lt;String&gt; handles = driver.getWindowHandles();</span><br><span class="line">      	<span class="comment">//判断是否为注册窗口， 并操作注册窗口上的元素</span></span><br><span class="line">        <span class="keyword">for</span>(String handle : handles)&#123;</span><br><span class="line">            <span class="keyword">if</span> (handle.equals(search_handle)==<span class="keyword">false</span>)&#123;</span><br><span class="line">                <span class="comment">//切换到注册页面</span></span><br><span class="line">                driver.switchTo().window(handle);</span><br><span class="line">                System.out.println(<span class="string">&quot;now register window!&quot;</span>);</span><br><span class="line">                Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">                driver.findElement(By.name(<span class="string">&quot;userName&quot;</span>)).clear();</span><br><span class="line">                driver.findElement(By.name(<span class="string">&quot;userName&quot;</span>)).sendKeys(<span class="string">&quot;user name&quot;</span>);</span><br><span class="line">                driver.findElement(By.name(<span class="string">&quot;phone&quot;</span>)).clear();</span><br><span class="line">                driver.findElement(By.name(<span class="string">&quot;phone&quot;</span>)).sendKeys(<span class="string">&quot;phone number&quot;</span>);</span><br><span class="line">                <span class="comment">//......</span></span><br><span class="line">                Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">                <span class="comment">//关闭当前窗口</span></span><br><span class="line">                driver.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">      	driver.quit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>十一、下拉框选择</strong></p>
+<p>  selectByValue()方法符用于选取<option>标签的value值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.openqa.selenium.By;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebElement;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.support.ui.Select;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SelectDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> ChromeDriver();</span><br><span class="line">        driver.get(<span class="string">&quot;https://www.baidu.com&quot;</span>);</span><br><span class="line">        driver.findElement(By.linkText(<span class="string">&quot;设置&quot;</span>)).click();</span><br><span class="line">        driver.findElement(By.linkText(<span class="string">&quot;搜索设置&quot;</span>)).click();</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        <span class="comment">//&lt;select&gt;标签的下拉框选择</span></span><br><span class="line">        WebElement el = driver.findElement(By.xpath(<span class="string">&quot;//select&quot;</span>));</span><br><span class="line">        Select sel = <span class="keyword">new</span> Select(el);</span><br><span class="line">        sel.selectByValue(<span class="string">&quot;20&quot;</span>);</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        driver.quit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>十二、警告框处理</strong></p>
+<p>  (1)、getText()：返回 alert/confirm/prompt 中的文字信息。</p>
+<p>  (2)、accept()：接受现有警告框。</p>
+<p>  (3)、dismiss()：解散现有警告框。</p>
+<p>  (4)、sendKeys(keysToSend)：发送文本至警告框。</p>
+<p>  (5)、keysToSend：将文本发送至警告框。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.openqa.selenium.By;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AlertDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    	WebDriver driver = <span class="keyword">new</span> ChromeDriver();</span><br><span class="line">        driver.get(<span class="string">&quot;https://www.baidu.com&quot;</span>);</span><br><span class="line">    	driver.findElement(By.linkText(<span class="string">&quot;设置&quot;</span>)).click();</span><br><span class="line">        driver.findElement(By.linkText(<span class="string">&quot;搜索设置&quot;</span>)).click();</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">    	<span class="comment">//保存设置</span></span><br><span class="line">        driver.findElement(By.className(<span class="string">&quot;prefpanelgo&quot;</span>)).click();</span><br><span class="line">    	<span class="comment">//接收弹窗</span></span><br><span class="line">        driver.switchTo().alert().accept();</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">    	driver.quit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>十三、文件上传</strong></p>
+<p>  创建upfile.html文件，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta http-equiv=<span class="string">&quot;content-type&quot;</span> content=<span class="string">&quot;text/html;charset=utf-8&quot;</span> /&gt;</span><br><span class="line">        &lt;title&gt;upload_file&lt;/title&gt;</span><br><span class="line">        &lt;link href=<span class="string">&quot;http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css&quot;</span> rel=<span class="string">&quot;stylesheet&quot;</span> /&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;row-fluid&quot;</span>&gt;</span><br><span class="line">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;span6 well&quot;</span>&gt;</span><br><span class="line">                &lt;h3&gt;upload_file&lt;/h3&gt;</span><br><span class="line">                &lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;file&quot;</span> /&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">    &lt;script src=<span class="string">&quot;http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.js&quot;</span>&gt;&lt;/scrip&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>通过浏览器打开upfile.html文件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.By;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UpFileDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> ChromeDriver();</span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">&quot;./HTMLFile/upfile.html&quot;</span>);</span><br><span class="line">        String filePath = file.getAbsolutePath();</span><br><span class="line">        driver.get(filePath);</span><br><span class="line">        <span class="comment">//定位上传按钮， 添加本地文件 </span></span><br><span class="line">        driver.findElement(By.name(<span class="string">&quot;file&quot;</span>)).sendKeys(<span class="string">&quot;D:\\upload_file.txt&quot;</span>);</span><br><span class="line">        Thread.sleep(<span class="number">5000</span>);</span><br><span class="line">        driver.quit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>十四、浏览器cookie操作</strong></p>
+<p>  (1)、getCookies() 获得所有 cookie 信息。</p>
+<p>  (2)、getCookieNamed(String name) 返回Cookie信息。</p>
+<p>  (3)、addCookie(cookie dict) 添加Cookie。</p>
+<p>  (4)、deleteCookieNamed(String name) 删除Cookie 信息。</p>
+<p>  (5)、deleteAllCookies() 删除所有 cookie 信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.Cookie;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CookieDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    	WebDriver driver = <span class="keyword">new</span> ChromeDriver();</span><br><span class="line">        driver.get(<span class="string">&quot;https://www.baidu.com&quot;</span>);</span><br><span class="line">    	Cookie c1 = <span class="keyword">new</span> Cookie(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;key-aaaaaaa&quot;</span>);</span><br><span class="line">        Cookie c2 = <span class="keyword">new</span> Cookie(<span class="string">&quot;value&quot;</span>, <span class="string">&quot;value-bbbbbb&quot;</span>);</span><br><span class="line">        driver.manage().addCookie(c1);</span><br><span class="line">        driver.manage().addCookie(c2);</span><br><span class="line">    	<span class="comment">//获得 cookie</span></span><br><span class="line">        Set&lt;Cookie&gt; coo = driver.manage().getCookies();</span><br><span class="line">        System.out.println(coo);</span><br><span class="line">    	<span class="comment">//删除所有 cookie</span></span><br><span class="line">        driver.manage().deleteAllCookies();</span><br><span class="line">    	driver.quit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="十五、调用javaScript代码"><a href="#十五、调用javaScript代码" class="headerlink" title="十五、调用javaScript代码"></a>十五、调用javaScript代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.openqa.selenium.By;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.Dimension;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.JavascriptExecutor;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JSDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException</span>&#123;</span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> ChromeDriver();</span><br><span class="line">        <span class="comment">//设置浏览器窗口大小</span></span><br><span class="line">        driver.manage().window().setSize(<span class="keyword">new</span> Dimension(<span class="number">700</span>, <span class="number">600</span>));</span><br><span class="line">        driver.get(<span class="string">&quot;https://www.baidu.com&quot;</span>);       <span class="comment">//进行百度搜索</span></span><br><span class="line">        driver.findElement(By.id(<span class="string">&quot;kw&quot;</span>)).sendKeys(<span class="string">&quot;webdriver api&quot;</span>);</span><br><span class="line">        driver.findElement(By.id(<span class="string">&quot;su&quot;</span>)).click();</span><br><span class="line">        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        <span class="comment">//将页面滚动条拖到底部</span></span><br><span class="line">        ((JavascriptExecutor)driver).executeScript(<span class="string">&quot;window.scrollTo(100,450);&quot;</span>);</span><br><span class="line">        Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">        driver.quit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="十六、获取窗口截图"><a href="#十六、获取窗口截图" class="headerlink" title="十六、获取窗口截图"></a>十六、获取窗口截图</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.io.FileUtils;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.OutputType;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.WebDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"><span class="keyword">import</span> org.openqa.selenium.TakesScreenshot;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GetImg</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] arge)</span></span>&#123;</span><br><span class="line">        WebDriver driver = <span class="keyword">new</span> ChromeDriver();</span><br><span class="line">        driver.get(<span class="string">&quot;https://www.baidu.com&quot;</span>);</span><br><span class="line">        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            FileUtils.copyFile(srcFile,<span class="keyword">new</span> File(<span class="string">&quot;d:\\screenshot.png&quot;</span>));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        driver.quit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="刘鹏飞 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="刘鹏飞 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>刘鹏飞
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://lxs.plus/2021/10/23/%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8DSelenium%E5%B8%B8%E7%94%A8API%E7%9A%84%E4%BD%BF%E7%94%A8/" title="详细介绍Selenium常用API的使用">https://lxs.plus/2021/10/23/详细介绍Selenium常用API的使用/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	  
+	</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/selenium/" rel="tag"><i class="fa fa-tag"></i> selenium</a>
+              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/23/mysql%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%E5%AD%98%E5%9C%A8%E6%97%A2%E6%9B%B4%E6%96%B0%EF%BC%8C%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%B0%B1%E6%B7%BB%E5%8A%A0/" rel="prev" title="mysql语句实现存在既更新，不存在就添加">
+      <i class="fa fa-chevron-left"></i> mysql语句实现存在既更新，不存在就添加
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/23/kafka%E6%A8%A1%E6%8B%9F%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85-%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F-%E5%AE%9E%E4%BE%8B/" rel="next" title="kafka模拟生产者消费者(集群模式)实例">
+      kafka模拟生产者消费者(集群模式)实例 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81Selenium%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-text">一、Selenium环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E4%B8%8B%E8%BD%BD%E6%B5%8F%E8%A7%88%E5%99%A8%E9%A9%B1%E5%8A%A8"><span class="nav-text">1、下载浏览器驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E8%AE%BE%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E9%A9%B1%E5%8A%A8"><span class="nav-text">2、设置浏览器驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AEjar%E5%8C%85"><span class="nav-text">3、项目配置jar包</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%B5%8B%E8%AF%95Selenium"><span class="nav-text">二、测试Selenium</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81selenium%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="nav-text">三、selenium元素定位</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%8E%A7%E5%88%B6%E6%B5%8F%E8%A7%88%E5%99%A8%E6%93%8D%E4%BD%9C"><span class="nav-text">四、控制浏览器操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E6%8E%A7%E5%88%B6%E6%B5%8F%E8%A7%88%E5%99%A8%E7%AA%97%E5%8F%A3%E5%A4%A7%E5%B0%8F"><span class="nav-text">1、控制浏览器窗口大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E6%8E%A7%E5%88%B6%E6%B5%8F%E8%A7%88%E5%99%A8%E5%90%8E%E9%80%80%E3%80%81%E5%89%8D%E8%BF%9B"><span class="nav-text">2、控制浏览器后退、前进</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%BA%94%E3%80%81%E8%B0%83%E7%94%A8javaScript%E4%BB%A3%E7%A0%81"><span class="nav-text">十五、调用javaScript代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E5%85%AD%E3%80%81%E8%8E%B7%E5%8F%96%E7%AA%97%E5%8F%A3%E6%88%AA%E5%9B%BE"><span class="nav-text">十六、获取窗口截图</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="刘鹏飞"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">刘鹏飞</p>
+  <div class="site-description" itemprop="description">个人学习记录</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lpf-exclusive" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lpf-exclusive" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_29928513" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_29928513" rel="noopener" target="_blank"><i class="CSDN fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lpf.exclusive@yahoo.com" title="E-Mail → mailto:lpf.exclusive@yahoo.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘鹏飞</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">54k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">50 分钟</span>
+</div>
+  <div class="powered-by">
+    <i class="fa fa-user-md"></i>
+	<span id="busuanzi_container_site_uv">
+      本站访客数:
+	  <span id="busuanzi_value_site_uv"></span>
+    </span>
+  </div>
+  
+  <!-- <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '0adb7a1511f0bacb0883',
+      clientSecret: 'e2ea363f71a72154273fbf108b409657746fe487',
+      repo        : 'gitment',
+      owner       : 'lpf-exclusive',
+      admin       : ['lpf-exclusive'],
+      id          : '2560c22c465d5aedd41068939cae4862',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
