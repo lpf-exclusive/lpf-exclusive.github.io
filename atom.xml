@@ -6,7 +6,7 @@
   <link href="https://www.lionet.vip/atom.xml" rel="self"/>
   
   <link href="https://www.lionet.vip/"/>
-  <updated>2021-11-18T01:40:18.375Z</updated>
+  <updated>2021-11-18T01:52:36.232Z</updated>
   <id>https://www.lionet.vip/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>注解</title>
+    <link href="https://www.lionet.vip/2021/11/18/%E6%B3%A8%E8%A7%A3/"/>
+    <id>https://www.lionet.vip/2021/11/18/%E6%B3%A8%E8%A7%A3/</id>
+    <published>2021-11-18T01:51:01.000Z</published>
+    <updated>2021-11-18T01:52:36.232Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Null</span>  # 被注释的元素必须为<span class="keyword">null</span></span><br><span class="line"><span class="meta">@NotNull</span>  # 被注释的元素不能为<span class="keyword">null</span></span><br><span class="line"><span class="meta">@AssertTrue</span>  # 被注释的元素必须为<span class="keyword">true</span></span><br><span class="line"><span class="meta">@AssertFalse</span>  # 被注释的元素必须为<span class="keyword">false</span></span><br><span class="line"><span class="meta">@Min(value)</span>  # 被注释的元素必须是一个数字，其值必须大于等于指定的最小值</span><br><span class="line"><span class="meta">@Max(value)</span>  # 被注释的元素必须是一个数字，其值必须小于等于指定的最大值</span><br><span class="line"><span class="meta">@DecimalMin(value)</span>  # 被注释的元素必须是一个数字，其值必须大于等于指定的最小值</span><br><span class="line"><span class="meta">@DecimalMax(value)</span>  # 被注释的元素必须是一个数字，其值必须小于等于指定的最大值</span><br><span class="line"><span class="meta">@Size(max,min)</span>  # 被注释的元素的大小必须在指定的范围内。</span><br><span class="line"><span class="meta">@Digits(integer,fraction)</span>  # 被注释的元素必须是一个数字，其值必须在可接受的范围内</span><br><span class="line"><span class="meta">@Past</span>  # 被注释的元素必须是一个过去的日期</span><br><span class="line"><span class="meta">@Future</span>  # 被注释的元素必须是一个将来的日期</span><br><span class="line"><span class="meta">@Pattern(value)</span> # 被注释的元素必须符合指定的正则表达式。</span><br><span class="line"><span class="meta">@Email</span> # 被注释的元素必须是电子邮件地址</span><br><span class="line"><span class="meta">@Length</span> # 被注释的字符串的大小必须在指定的范围内</span><br><span class="line"><span class="meta">@NotEmpty</span>  # 被注释的字符串必须非空</span><br><span class="line"><span class="meta">@Range</span>  # 被注释的元素必须在合适的范围内</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=</summary>
+      
+    
+    
+    
+    <category term="小记" scheme="https://www.lionet.vip/categories/%E5%B0%8F%E8%AE%B0/"/>
+    
+    
+    <category term="注解" scheme="https://www.lionet.vip/tags/%E6%B3%A8%E8%A7%A3/"/>
+    
+    <category term="java" scheme="https://www.lionet.vip/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>mapper.xml不编译问题</title>
