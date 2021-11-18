@@ -20,20 +20,22 @@
     var CONFIG = {"hostname":"www.lionet.vip","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="git pull git pull origin master git pull origin master –allow-unrelated-histories">
+  <meta name="description" content="日志相关类库，例如 Log4j 、 SLF4j 和 LogBack。了解为什么SLF4J要比Log4J要好。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git首次提交不上问题">
-<meta property="og:url" content="https://www.lionet.vip/2021/11/18/git%E9%A6%96%E6%AC%A1%E6%8F%90%E4%BA%A4%E4%B8%8D%E4%B8%8A%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="日志相关类库">
+<meta property="og:url" content="https://www.lionet.vip/2021/11/18/%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3%E7%B1%BB%E5%BA%93/index.html">
 <meta property="og:site_name" content="刘先生の博客">
-<meta property="og:description" content="git pull git pull origin master git pull origin master –allow-unrelated-histories">
+<meta property="og:description" content="日志相关类库，例如 Log4j 、 SLF4j 和 LogBack。了解为什么SLF4J要比Log4J要好。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-11-18T01:33:23.000Z">
-<meta property="article:modified_time" content="2021-11-18T02:16:24.549Z">
+<meta property="article:published_time" content="2021-11-18T02:41:15.000Z">
+<meta property="article:modified_time" content="2021-11-18T02:45:28.304Z">
 <meta property="article:author" content="刘鹏飞">
-<meta property="article:tag" content="git">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="log4j">
+<meta property="article:tag" content="slf4j">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://www.lionet.vip/2021/11/18/git%E9%A6%96%E6%AC%A1%E6%8F%90%E4%BA%A4%E4%B8%8D%E4%B8%8A%E9%97%AE%E9%A2%98/">
+<link rel="canonical" href="https://www.lionet.vip/2021/11/18/%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3%E7%B1%BB%E5%BA%93/">
 
 
 <script id="page-configurations">
@@ -46,7 +48,7 @@
   };
 </script>
 
-  <title>git首次提交不上问题 | 刘先生の博客</title>
+  <title>日志相关类库 | 刘先生の博客</title>
   
 
 
@@ -185,7 +187,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.lionet.vip/2021/11/18/git%E9%A6%96%E6%AC%A1%E6%8F%90%E4%BA%A4%E4%B8%8D%E4%B8%8A%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://www.lionet.vip/2021/11/18/%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3%E7%B1%BB%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -198,7 +200,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          git首次提交不上问题
+          日志相关类库
         </h1>
 
         <div class="post-meta">
@@ -209,7 +211,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-11-18 09:33:23 / 修改时间：10:16:24" itemprop="dateCreated datePublished" datetime="2021-11-18T09:33:23+08:00">2021-11-18</time>
+              <time title="创建时间：2021-11-18 10:41:15 / 修改时间：10:45:28" itemprop="dateCreated datePublished" datetime="2021-11-18T10:41:15+08:00">2021-11-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -234,14 +236,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>71</span>
+              <span>4.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -253,10 +255,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>git pull</p>
-<p>git pull origin master</p>
-<p>git pull origin master –allow-unrelated-histories</p>
-<span id="more"></span>
+        <p>日志相关类库，例如 Log4j 、 SLF4j 和 LogBack。<br>了解为什么SLF4J要比Log4J要好。<span id="more"></span></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line">slf4j配置</span><br><span class="line"><span class="number">1</span>、</span><br><span class="line">&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/org.slf4j/slf4j-api --&gt;</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">1.7</span><span class="number">.2</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"> </span><br><span class="line">&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 --&gt;</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">1.7</span><span class="number">.2</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"> </span><br><span class="line"><span class="number">2</span>、</span><br><span class="line">### 设置###</span><br><span class="line">log4j.rootLogger = debug,stdout,D,E</span><br><span class="line"></span><br><span class="line">### 输出信息到控制抬 ###</span><br><span class="line">log4j.appender.stdout = org.apache.log4j.ConsoleAppender</span><br><span class="line">log4j.appender.stdout.Target = System.out</span><br><span class="line">log4j.appender.stdout.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern = [%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n</span><br><span class="line"></span><br><span class="line">### 输出DEBUG 级别以上的日志到=E:<span class="comment">//logs/error.log ###</span></span><br><span class="line">log4j.appender.D = org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.D.File = D:<span class="comment">//logs/log.log</span></span><br><span class="line">log4j.appender.D.Append = <span class="keyword">true</span></span><br><span class="line">log4j.appender.D.Threshold = DEBUG</span><br><span class="line">log4j.appender.D.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.D.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</span><br><span class="line"></span><br><span class="line">### 输出ERROR 级别以上的日志到=E:<span class="comment">//logs/error.log ###</span></span><br><span class="line">log4j.appender.E = org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.E.File =D:<span class="comment">//logs/error.log</span></span><br><span class="line">log4j.appender.E.Append = <span class="keyword">true</span></span><br><span class="line">log4j.appender.E.Threshold = ERROR</span><br><span class="line">log4j.appender.E.layout = org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.E.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</span><br><span class="line"></span><br><span class="line">###配置日志根Logger</span><br><span class="line">log4j.rootLogger=DEBUG,stdout,file</span><br><span class="line">#ERROR 为严重错误 主要是程序的错误</span><br><span class="line">#WARN 为一般警告，比如session丢失</span><br><span class="line">#INFO 为一般要显示的信息，比如登录登出</span><br><span class="line">#DEBUG 为程序的调试信息</span><br><span class="line">log4j.additivity.org.apache=<span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">###配置日志信息输出目的地Appender</span><br><span class="line">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</span><br><span class="line">#org.apache.log4j.ConsoleAppender（控制台）</span><br><span class="line">#org.apache.log4j.FileAppender（文件）</span><br><span class="line">#org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件）</span><br><span class="line">#org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件）</span><br><span class="line">#org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方）</span><br><span class="line">#log4j.appender.error.Target=System.out</span><br><span class="line">###输出ERROR级别以上的日志</span><br><span class="line">log4j.appender.stdout.threshold=INFO</span><br><span class="line">###配置日志信息的格式（布局）</span><br><span class="line">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</span><br><span class="line">#org.apache.log4j.HTMLLayout（以HTML表格形式布局）</span><br><span class="line">#org.apache.log4j.PatternLayout（可以灵活地指定布局模式）</span><br><span class="line">#org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串）</span><br><span class="line">#org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等等信息）</span><br><span class="line">###配置日志打印的格式格式化日志信息</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern=%d&#123;yyyy-MM-dd HH:mm:ss&#125; %-5p %c&#123;<span class="number">1</span>&#125;:%L - %m%n</span><br><span class="line"></span><br><span class="line">#%m   输出代码中指定的消息</span><br><span class="line">#%p   输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL</span><br><span class="line">#%r   输出自应用启动到输出该log信息耗费的毫秒数</span><br><span class="line">#%c   输出所属的类目，通常就是所在类的全名</span><br><span class="line">#%t   输出产生该日志事件的线程名</span><br><span class="line">#%n   输出一个回车换行符，Windows平台为“\r\n”，Unix平台为“\n”</span><br><span class="line">#%d   输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d&#123;yyy MMM dd HH:mm:ss , SSS&#125;</span><br><span class="line">#%l   输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数</span><br><span class="line">#log4j.appender.file=org.apache.log4j.RollingFileAppender</span><br><span class="line">log4j.appender.file=org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.file.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.file.DatePattern=<span class="string">&#x27;.&#x27;</span>yyyy-MM-dd-HH-mm</span><br><span class="line"># <span class="string">&#x27;.&#x27;</span>yyyy-MM：每月</span><br><span class="line"># <span class="string">&#x27;.&#x27;</span>yyyy-ww：每周</span><br><span class="line"># <span class="string">&#x27;.&#x27;</span>yyyy-MM-dd：每天</span><br><span class="line"># <span class="string">&#x27;.&#x27;</span>yyyy-MM-dd-a：每天两次</span><br><span class="line"># <span class="string">&#x27;.&#x27;</span>yyyy-MM-dd-HH：每小时</span><br><span class="line"># <span class="string">&#x27;.&#x27;</span>yyyy-MM-dd-HH-mm：每分钟</span><br><span class="line">#log4j.appender.file.MaxFileSize=1MB</span><br><span class="line">###滚动文件的最大数</span><br><span class="line">#log4j.appender.file.MaxBackupIndex=<span class="number">8</span></span><br><span class="line">log4j.appender.file.layout.ConversionPattern=%d&#123;yyyy-MM-dd HH:mm:ss&#125; [%-5p](%-30c&#123;<span class="number">1</span>&#125;) [TxId : %X&#123;PtxId&#125; , SpanId : %X&#123;PspanId&#125;] [ET:%X&#123;ENV_TYPE&#125;,AN:%X&#123;APP_NAME&#125;,SN:%X&#123;SERVICE_NAME&#125;,CN:%X&#123;CONTAINER_NAME&#125;,CI:%X&#123;CONTAINER_IP&#125;] %m%n</span><br><span class="line">log4j.appender.file.Threshold=DEBUG</span><br><span class="line">###将消息增加到指定文件中,<span class="keyword">false</span>指将消息覆盖指定的文件内容</span><br><span class="line">log4j.appender.file.append=<span class="keyword">true</span></span><br><span class="line">###日志的保存位置</span><br><span class="line">#log4j.appender.file.File=E:/logs/file-debug-log.log</span><br><span class="line">log4j.appender.file.File=E:/logs/debug-debug.log</span><br><span class="line">###每天产生一个日志文件</span><br><span class="line">#log4j.appender.file=org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">#log4j.appender.file.layout=org.apache.log4j.PatternLayout</span><br><span class="line">#log4j.appender.file.maxFileSize=<span class="number">100</span></span><br><span class="line">#log4j.appender.file.maxBackupIndex=<span class="number">5</span></span><br><span class="line">#log4j.appender.file.layout.ConversionPattern=%d&#123;yyyy-MM-dd HH:mm:ss&#125; [%-5p](%-30c&#123;<span class="number">1</span>&#125;) [TxId : %X&#123;PtxId&#125; , SpanId : %X&#123;PspanId&#125;] [ET:%X&#123;ENV_TYPE&#125;,AN:%X&#123;APP_NAME&#125;,SN:%X&#123;SERVICE_NAME&#125;,CN:%X&#123;CONTAINER_NAME&#125;,CI:%X&#123;CONTAINER_IP&#125;] %m%n</span><br><span class="line">#log4j.appender.file.Threshold=DEBUG</span><br><span class="line">#log4j.appender.file.append=<span class="keyword">true</span></span><br><span class="line">#log4j.appender.file.File=E:/logs/debug-log.log</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Logger logger = LoggerFactory.getLogger(Log4jTestDemo.class);</span><br><span class="line"> </span><br><span class="line"> <span class="comment">// 记录debug级别的信息</span></span><br><span class="line"> logger.debug(<span class="string">&quot;This is debug message.&quot;</span>);</span><br><span class="line"> <span class="comment">// 记录info级别的信息</span></span><br><span class="line"> logger.info(<span class="string">&quot;This is info message.&quot;</span>);</span><br><span class="line"> <span class="comment">// 记录error级别的信息</span></span><br><span class="line"> logger.error(<span class="string">&quot;This is error message.&quot;</span>);</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -292,7 +293,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.lionet.vip/2021/11/18/git%E9%A6%96%E6%AC%A1%E6%8F%90%E4%BA%A4%E4%B8%8D%E4%B8%8A%E9%97%AE%E9%A2%98/" title="git首次提交不上问题">https://www.lionet.vip/2021/11/18/git首次提交不上问题/</a>
+    <a href="https://www.lionet.vip/2021/11/18/%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3%E7%B1%BB%E5%BA%93/" title="日志相关类库">https://www.lionet.vip/2021/11/18/日志相关类库/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -332,7 +333,9 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+              <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+              <a href="/tags/log4j/" rel="tag"><i class="fa fa-tag"></i> log4j</a>
+              <a href="/tags/slf4j/" rel="tag"><i class="fa fa-tag"></i> slf4j</a>
           </div>
 
         
@@ -341,13 +344,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/11/12/CentOS7%E4%B8%8Byum%E5%AE%89%E8%A3%85redis%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/" rel="prev" title="CentOS7下yum安装redis以及使用">
-      <i class="fa fa-chevron-left"></i> CentOS7下yum安装redis以及使用
+    <a href="/2021/11/18/java%E5%B7%A5%E5%85%B7%E7%B1%BB/" rel="prev" title="java工具类">
+      <i class="fa fa-chevron-left"></i> java工具类
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/11/18/mapper-xml%E4%B8%8D%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98/" rel="next" title="mapper.xml不编译问题">
-      mapper.xml不编译问题 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -609,7 +609,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'gitment',
       owner       : 'lpf-exclusive',
       admin       : ['lpf-exclusive'],
-      id          : 'fe5d7027f105c3daea38dcf6f87ca456',
+      id          : '677c40ec8f8c63762203a54cd83144a3',
         language: '',
       distractionFreeMode: true
     });
