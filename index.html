@@ -573,7 +573,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-17 16:21:45" itemprop="dateModified" datetime="2021-11-17T16:21:45+08:00">2021-11-17</time>
+                <time title="修改时间：2021-11-18 10:22:28" itemprop="dateModified" datetime="2021-11-18T10:22:28+08:00">2021-11-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -619,13 +619,7 @@
 <p>3.启动、停止、重启、查看redis服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl start redis	# 启动redis服务</span><br><span class="line">systemctl stop redis	# 停止redis服务</span><br><span class="line">systemctl restart redis # 重启redis服务</span><br><span class="line">systemctl status redis	# 查看redis状态</span><br></pre></td></tr></table></figure>
 
-<p>4.设置开机自启动</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable redis</span><br></pre></td></tr></table></figure>
-
-<p>7.开放端口号</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=<span class="keyword">public</span> --add-port=<span class="number">80</span>/tcp --permanent</span><br><span class="line">firewall-cmd --zone=<span class="keyword">public</span> --add-port=<span class="number">6379</span>/tcp --permanent</span><br></pre></td></tr></table></figure>
-
-<p>注意：80端口是必须要开放的
+<p>4.设置开机自启动
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/11/12/CentOS7%E4%B8%8Byum%E5%AE%89%E8%A3%85redis%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/#more" rel="contents">
@@ -683,7 +677,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-17 16:23:09" itemprop="dateModified" datetime="2021-11-17T16:23:09+08:00">2021-11-17</time>
+                <time title="修改时间：2021-11-18 10:23:42" itemprop="dateModified" datetime="2021-11-18T10:23:42+08:00">2021-11-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -733,13 +727,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">192.168</span><span class="number">.1</span><span class="number">.111</span>	master</span><br><span class="line"><span class="number">192.168</span><span class="number">.1</span><span class="number">.112</span>	slave01</span><br><span class="line"><span class="number">192.168</span><span class="number">.1</span><span class="number">.113</span>	slave02</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="zookeeper安装"><a href="#zookeeper安装" class="headerlink" title="zookeeper安装"></a>zookeeper安装</h2><ol>
-<li>解压zookeeper安装包</li>
-<li>将conf下面原来的配置文件重命名为zoo.cfg</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim zoo.cfg</span><br></pre></td></tr></table></figure>
-
-<p>数据文件路径（需要先创建好文件）
+<h2 id="zookeeper安装"><a href="#zookeeper安装" class="headerlink" title="zookeeper安装"></a>zookeeper安装
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/10/23/zookeeper-kafka-storm%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/#more" rel="contents">
@@ -992,7 +980,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-17 16:22:52" itemprop="dateModified" datetime="2021-11-17T16:22:52+08:00">2021-11-17</time>
+                <time title="修改时间：2021-11-18 10:24:06" itemprop="dateModified" datetime="2021-11-18T10:24:06+08:00">2021-11-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1035,9 +1023,7 @@
 <li>string 类型是二进制安全的。意思是 redis 的 string 可以包含任何数据。比如jpg图片或者序列化的对象；</li>
 <li>string 类型是 Redis 最基本的数据类型，string 类型的值最大能存储 512MB；<h1 id="Hash（哈希）"><a href="#Hash（哈希）" class="headerlink" title="Hash（哈希）"></a>Hash（哈希）</h1></li>
 <li>Redis hash 是一个键值(key=&gt;value)对集合；</li>
-<li>Redis hash 是一个 string 类型的 field 和 value 的映射表，hash 特别适合用于存储对象；<h1 id="List（列表）"><a href="#List（列表）" class="headerlink" title="List（列表）"></a>List（列表）</h1></li>
-<li>Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）；<h1 id="Set（集合）"><a href="#Set（集合）" class="headerlink" title="Set（集合）"></a>Set（集合）</h1></li>
-<li>Redis 的 Set 是 string 类型的无序集合；
+<li>Redis hash 是一个 string 类型的 field 和 value 的映射表，hash 特别适合用于存储对象；
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/10/23/Redis%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%AF%A6%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/#more" rel="contents">
@@ -1095,7 +1081,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-17 16:22:35" itemprop="dateModified" datetime="2021-11-17T16:22:35+08:00">2021-11-17</time>
+                <time title="修改时间：2021-11-18 10:24:26" itemprop="dateModified" datetime="2021-11-18T10:24:26+08:00">2021-11-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1144,12 +1130,7 @@
 </ol>
 <p><strong>在5.5版本之前，MyISAM是MySQL的默认存储引擎，该存储引擎并发性差，不支持事务，所以使用场景比较少，主要特点为：</strong></p>
 <ol>
-<li>不支持事务；</li>
-<li>不支持外键，如果强行增加外键，不会提示错误，只是外键不其作用；</li>
-<li>对数据的查询缓存只会缓存索引，不会像InnoDB一样缓存数据，而且是利用操作系统本身的缓存；</li>
-<li>默认的锁粒度为表级锁，所以并发度很差，加锁快，锁冲突较少，所以不太容易发生死锁；</li>
-<li>支持全文索引（MySQL5.6之后，InnoDB存储引擎也对全文索引做了支持），但是MySQL的全文索引基本不会使用，对于全文索引，现在有其他成熟的解决方案，比如：ElasticSearch，Solr，Sphinx等。</li>
-<li>数据库所在主机如果宕机，MyISAM的数据文件容易损坏，而且难恢复；
+<li>不支持事务；
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/10/23/MYSQL%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E8%AF%A6%E8%A7%A3/#more" rel="contents">
